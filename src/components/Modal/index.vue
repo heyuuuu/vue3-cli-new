@@ -1,7 +1,7 @@
 <template>
 	<div class="mask" :class="[maskClass,{'show': isShow},isShow ? showClass : hideClass]" >
 		<div class="container" :class="[containerClass]">
-			<slot></slot>
+			<slot />
 		</div>
 	</div>
 </template>

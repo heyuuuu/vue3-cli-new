@@ -1,6 +1,6 @@
-import { Provider } from "src/utils"
+import { Tools } from "src/utils"
 export default {
 	setup(){
-		Provider.Loading(false)
+		Tools.Loading(false)
 	}
 }

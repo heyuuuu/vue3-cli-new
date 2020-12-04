@@ -1,4 +1,4 @@
-import { createRouter , createWebHistory , createWebHashHistory } from "vue-router";
+import { createRouter , createWebHistory } from "vue-router";
 import Home from "src/pages/home/index.vue"
 const UserView = () => import("src/pages/user/index.vue")
 const ReactView = () => import("src/pages/react/index.vue")

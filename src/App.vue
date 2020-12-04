@@ -1,32 +1,30 @@
 <template>
   <div id="app">
+		<Toast :module="toast" />
+		<router-view />
 		<Loading />
-    <router-view />
   </div>
 </template>
 <script lang="ts">
-import {
-	getCurrentInstance
-} from "vue"
-import {
-	Provider
-} from "./utils"
-import Loading from "./components/Loading/index.vue"
-import $router from "./router"
-export default {
-	components: {Loading},
-	setup(){
-		console.log("ctx==============",$router)
-		$router.beforeEach((to, from, next) => {
-			Provider.Loading(true)
-			next()
-		})
-	}
-}
+import main from "./App"
+export default main
 </script>
-<style>
+<style lang="scss">
 	html,body{
 		margin: 0;
 		padding: 0;
+	}
+	p{
+		margin: 0;
+		padding: 0;
+	}
+	.flex{
+		display: flex;
+		&-full{
+			flex: 1
+		}
+		&.baseline{
+			align-items: center;
+		}
 	}
 </style>

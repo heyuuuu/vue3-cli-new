@@ -1,7 +1,12 @@
 <template>
   <div>
+		<Toast :module="toast">
+			<template #default="state">
+				<div>000<span v-for="(msg,index) in state.message" :key="index">{{msg}}</span>====</div>
+			</template>
+		</Toast>
 		<div class="home"></div>
-    <ReactInfo :msg="'xxxxxxx'" />
+		<span @click="comfire">toast</span>
   </div>
 </template>
 

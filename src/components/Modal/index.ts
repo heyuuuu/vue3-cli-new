@@ -1,9 +1,24 @@
 export default {
 	props: {
-		isShow: Boolean,
-		maskClass: String,
-		containerClass: String,
-		showClass: String,
-		hideClass: String
+		isShow: {
+			type: Boolean,
+			default: false
+		},
+		maskClass: {
+			type: String,
+			default: ""
+		},
+		containerClass: {
+			type: String,
+			default: ""
+		},
+		showClass: {
+			type: String,
+			default: ""
+		},
+		hideClass: {
+			type: String,
+			default: ""
+		}
 	}
 }

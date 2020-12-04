@@ -1,9 +1,11 @@
 import Request from "./request"
-import Provider from "./provider"
 import WebViewBridge from "./webViewBridge"
+import Tools from "./tools"
+import Login from "./login"
 
 export {
+	Login,
+	Tools,
 	Request,
-	Provider,
 	WebViewBridge
 }

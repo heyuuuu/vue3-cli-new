@@ -2,10 +2,14 @@
 	<div class="container">
 		<div class="nav" />
 		<div class="head" />
+		<!-- <Report /> -->
 		<p>{{inputContent}}</p>
-		<p>this is Home</p>
+		<Authorize :onSuccess="loginSuccess" class="flex">Login</Authorize>
 		<p>{{state.content}}</p>
-		<img :src="modelImg" />
+		<div class="flex baseline">
+			<img :src="modelImg" />
+			<span>word!</span>
+		</div>
 		<div>
 			<span @click="goReact">go react</span>
 		</div>

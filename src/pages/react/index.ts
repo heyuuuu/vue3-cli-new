@@ -1,40 +1,40 @@
-import {
-	onMounted
-} from "vue"
-import { Provider } from "src/utils"
+import { Tools } from "src/utils"
 import { RequestBang } from "src/utils/requests"
-import ReactInfo from "src/components/ReactInfo.vue"
+import { Toast , ToastModal} from "src/components"
 
 export default {
   name: "react",
-  components: {
-    ReactInfo
-	},
-	setup(): any {
-		onMounted(() => {
-			new RequestBang({
-				url: "/web/ad/g-ads",
-				method: "post",
-				data: {gid: 2}
-			})
-			.success((res,done) => {
-				setTimeout(() => {
-					console.log(res.resInfo)
-					done()
-				}, 3000);
-				return false
-			})
-			.finally(res => {
-				Provider.Loading(false)
-				console.log(res,"finnnn")
-			})
-			.catch((e,done) => {
-				// done()
-				console.log(e.message)
-			})
+  components: {Toast},
+	setup(){
+		const toast = ToastModal()
+		new RequestBang({
+			url: "/web/ad/g-ads",
+			method: "post",
+			data: {gid: 2}
 		})
+		.success(res => {
+			console.log("success",res)
+			// return false
+		})
+		.error(res => {
+			console.log("error",res)
+		})
+		.catch(e => {
+			// done()
+			console.log("catch",e)
+		})
+		.finally(res => {
+			Tools.Loading(false)
+			console.log(res,"finnnn")
+		})
+		.async()
+		console.log("===================")
+		const comfire = () => {
+			toast.message("xxxxxxxxx")
+		}
 		return {
-
+			toast,
+			comfire
     };
 	}
 };
