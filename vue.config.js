@@ -11,15 +11,16 @@ module.exports = {
 		config
 			.plugin('define')
 			.tap(args => {
-					args[0].$BRANCH_ENV = JSON.stringify(branch_env)
-					return args
+				args[0].BRANCH_ENV = JSON.stringify(branch_env)
+				args[0].BRANCH_CONFIG = JSON.stringify(BRANCH_CONFIG)
+				return args
 			})
 		config.resolve.alias.set('src', path.join(__dirname,"src"))
 	},
 	css: {
 		loaderOptions: {
 			postcss: {
-				plugins: [px2rem({remUnit: 75})]
+				plugins: [require("autoprefixer"),px2rem({remUnit: 75})]
 			}
 		}
 	},
@@ -31,5 +32,8 @@ module.exports = {
 			maskIcon: 'favicon.ico',
 			msTileImage: 'favicon.ico'
 		}
+	},
+	devServer: {
+		allowedHosts: ["test2.duia.com"]
 	}
 };

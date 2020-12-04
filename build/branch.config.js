@@ -1,15 +1,27 @@
 const BRANCH_CONFIG = {
 	dev: {
-		outputDir: "dist"
+		outputDir: "dist",
+		bang: "//bang.test.duia.com",
+		tuPath: "//tu.test.duia.com",
+		loginAddress: "//login.test.duia.com"
 	},
 	test: {
-		outputDir: "dev"
+		outputDir: "dev",
+		bang: "//bang.test.duia.com",
+		tuPath: "//tu.test.duia.com",
+		loginAddress: "//login.test.duia.com"
 	},
 	rd: {
-		outputDir: "rd"
+		outputDir: "rd",
+		bang: "//bang.test.duia.com",
+		tuPath: "//tu.test.duia.com",
+		loginAddress: "//login.test.duia.com"
 	},
 	pro: {
-		outputDir: "pro"
+		outputDir: "pro",
+		bang: "//bang.test.duia.com",
+		tuPath: "//tu.test.duia.com",
+		loginAddress: "//login.test.duia.com"
 	}
 }
 
