@@ -1,13 +1,28 @@
 <template>
-  <div id="app">
-		<Toast :module="toast" />
-		<router-view />
-		<Loading />
-  </div>
+<div>
+	<van-overlay :show="loading" >
+		<div class="wrapper">
+			<van-loading />
+		</div>
+	</van-overlay>
+	<router-view />
+</div>
 </template>
 <script lang="ts">
-import main from "./App"
-export default main
+import { defineComponent } from "vue"
+import { mapState } from "vuex"
+import { Tools } from "./utils"
+import $router from "./router"
+
+export default defineComponent({
+	setup(){
+		$router.beforeEach((to, from, next) => {
+			Tools.Loading(true)
+			next()
+		})
+	},
+	computed: mapState(['loading'])
+})
 </script>
 <style lang="scss">
 	html,body{
@@ -26,5 +41,13 @@ export default main
 		&.baseline{
 			align-items: center;
 		}
+	}
+</style>
+<style scoped>
+	.wrapper {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
 	}
 </style>

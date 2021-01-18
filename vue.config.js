@@ -5,7 +5,7 @@ const { NODE_ENV , branch_env } = process.env
 const BRANCH_CONFIG = CONFIG[branch_env]
 
 module.exports = {
-  publicPath: NODE_ENV === "production" ? "/" : "/",
+  	publicPath: NODE_ENV === "production" ? "/" : "/",
 	outputDir: BRANCH_CONFIG.outputDir,
 	chainWebpack: config => {
 		config
@@ -20,7 +20,9 @@ module.exports = {
 	css: {
 		loaderOptions: {
 			postcss: {
-				plugins: [require("autoprefixer"),px2rem({remUnit: 75})]
+				plugins(loader){
+					return /vant[\\\/]lib[\\\/]index.css/.test(loader.resourcePath) ? [] : [require("autoprefixer"),px2rem({remUnit: 75})]
+				}
 			}
 		}
 	},

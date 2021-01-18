@@ -1,11 +1,12 @@
-import Request from "./request"
+import Request , { createRequest } from "./request"
 import WebViewBridge from "./webViewBridge"
 import Tools from "./tools"
-import Login from "./login"
+import Account from "./account"
 
 export {
-	Login,
 	Tools,
+	Account,
 	Request,
+	createRequest,
 	WebViewBridge
 }

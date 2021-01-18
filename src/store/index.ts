@@ -14,7 +14,7 @@ export const store = createStore({
 	// 用于异步 dispatch
   actions: {
 		GetUserInfo({commit,state},params){
-			console.log("GetUserInfo",params,state.userInfo)
+			console.log("GetUserInfo",params,state.userInfo,commit)
 		}
 	},
 	// 模块化

@@ -13,24 +13,18 @@ interface ISubscribeProiseResultType {
 	result: any
 }
 
-class Request<ResponenseDataProps = any> {
+class RequestClass<ResponenseDataProps> {
 	// 获取返回的respones
 	public $response: AxiosResponse<ResponenseDataProps>
 	// 请求实例
 	private $xhr: AxiosPromise<ResponenseDataProps>
 	// 订阅中心
 	private $subscribe: Promise<ISubscribeProiseResultType>
+	// 判断是否成功返回
+	private checkSuccessStatus = (result: ResponenseDataProps) => true || result
 
 	constructor(params: RequestConfigProps) {
 		this.XMLHttpRequest(this.transformRequestPramas(params))
-	}
-	// 发起请求前处理配置
-	protected transfromRequestBeforeConfig(params: AxiosRequestConfig):AxiosRequestConfig {
-		return params
-	} 
-	// 判断是否成功返回
-	protected checkSuccessStatus(result: ResponenseDataProps):boolean {
-		return result ? true : false
 	}
 	// 处理请求配置
 	private transformRequestPramas(config: RequestConfigProps): AxiosRequestConfig{
@@ -38,8 +32,7 @@ class Request<ResponenseDataProps = any> {
 		const { apiDomainName = "bang" , ...params } = config
 		// 设置默认的baseUrl
 		params.baseURL = params.baseURL || BRANCH_CONFIG[apiDomainName]
-		// 是否对配置进行整体处理
-		return this.transfromRequestBeforeConfig(params)
+		return params
 	}
 	private XMLHttpRequest(params: AxiosRequestConfig) {
 		this.$xhr = Axios(params)
@@ -67,6 +60,10 @@ class Request<ResponenseDataProps = any> {
 			return res
 		})
 	}
+	public state(callback: (result: ResponenseDataProps) => boolean):this {
+		this.checkSuccessStatus = callback
+		return this
+	}
 	public success(callback: ResultCallback<ResponenseDataProps>):this {
 		this.subscribe("success",callback)
 		return this
@@ -88,6 +85,32 @@ class Request<ResponenseDataProps = any> {
 	}
 }
 
+// 合并对象
+function merge(target: OBJ,mixTarget: OBJ): OBJ{
+	const keys: Array<string> = Array.from(new Set(Object.keys(target).concat(Object.keys(mixTarget))))
+	keys.map(k => {
+		if(mixTarget[k] instanceof Function){
+			target[k] = mixTarget[k]
+		}else if(mixTarget[k] instanceof Object && target[k]){
+			target[k] = merge(target[k],mixTarget[k])
+		}else if(mixTarget[k]){
+			target[k] = mixTarget[k]
+		}
+	})
+	return target
+}
+
+function Request<ResponenseDataProps = any>(params: RequestConfigProps): RequestClass<ResponenseDataProps>{
+	return new RequestClass<ResponenseDataProps>(params)
+}
+
+function createRequest<ResponenseDataProps = any>(defaultParams: RequestConfigProps) {
+	return function(params: RequestConfigProps): RequestClass<ResponenseDataProps>{
+		const mixParams = merge(params,defaultParams)
+		return Request<ResponenseDataProps>(mixParams)
+	}
+}
+
 export default Request
 
-export { AxiosRequestConfig }
+export { createRequest }

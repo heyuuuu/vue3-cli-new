@@ -13,7 +13,8 @@
     "strictNullChecks": true,
 		"sourceMap": false,
 		"strictPropertyInitialization": false,
-		"noImplicitAny": true,
+    "noImplicitAny": true,
+    "skipLibCheck": true,
     "types": [
       "webpack-env"
     ],
