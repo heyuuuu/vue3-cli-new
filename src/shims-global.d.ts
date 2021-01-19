@@ -1,6 +1,6 @@
 declare type OBJ = Record<string|number,any>
 
-declare type ApiDomainItem = "bang" | "tuPath" | "loginAddress"
+declare type ApiDomainItem = "bang" | "tuPath"
 
 declare const BRANCH_ENV: "dev" | "test" | "rd" | "pro"
 
@@ -13,7 +13,7 @@ declare interface ResponseDataProps<DataProps = any> {
 }
 
 declare interface RouterItem {
-  name: string
+  	name: string
 	path: string
 	component: (() => Promise<typeof import("*.vue")>) | import("vue").DefineComponent | any
 	props?(route: OBJ): OBJ
